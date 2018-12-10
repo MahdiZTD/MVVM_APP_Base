@@ -8,7 +8,7 @@ import retrofit2.http.*
  * Created by Mahdi_ZareTahghighDoost(ZTD)
  *  on 9/11/2018.
  */
-interface ForSquerInterface {
+interface ForSquareInterface {
 
     @GET("/v2/venues/explore?")
     fun getNearVenueByLocation(@Query("ll") location:String ,

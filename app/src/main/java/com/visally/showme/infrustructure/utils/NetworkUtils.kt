@@ -1,4 +1,4 @@
-package com.visally.infrustructure.utils
+package com.visally.showme.infrustructure.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -33,18 +33,17 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
                 .subscribe { searchVenueModel: SearchVenueResponse? ->
                     val venueModel: MutableList<VenueModel> = mutableListOf()
                     searchVenueModel?.response?.groups?.forEach {
-                        it?.items?.forEach { it ->
-                            venueModel.add(VenueModel(it?.venue?.id.toString()
-                                    , it?.venue?.location?.lat?.toFloat()
-                                    , it?.venue?.location?.lng?.toFloat()
-                                    , it?.venue?.name, it?.venue?.location?.crossStreet
-                                    , it?.venue?.location?.distance.toString()
-                                    , it?.venue?.location?.formattedAddress.toString()
-                                    , it?.venue?.location?.city
-                                    , it?.venue?.categories?.get(0)?.name))
+                        it?.items?.forEach { group ->
+                            venueModel.add(VenueModel(group?.venue?.id.toString()
+                                    , group?.venue?.location?.lat?.toFloat()
+                                    , group?.venue?.location?.lng?.toFloat()
+                                    , group?.venue?.name, group?.venue?.location?.crossStreet
+                                    , group?.venue?.location?.distance.toString()
+                                    , group?.venue?.location?.formattedAddress.toString()
+                                    , group?.venue?.location?.city
+                                    , group?.venue?.categories?.get(0)?.name))
                         }
                     }
-
                     Completable.create {
                         dataManager.insertVenueModel(venueModel)
                         it.onComplete()
