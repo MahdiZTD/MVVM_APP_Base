@@ -6,7 +6,7 @@ import com.visally.showme.infrustructure.data.model.db.VenueModel
 
 
 interface DbHelper {
-    fun insertVenueModel(venueModels:MutableList<VenueModel>)
-    fun getAllVenueFromDb():LiveData<List<VenueModel>>
-    fun getAllVenueByLocationFromDb(lat:Float, lng:Float):LiveData<List<VenueModel>>
+    fun insertVenueModel(venueModels: MutableList<VenueModel>)
+    fun getAllVenueFromDb(): LiveData<List<VenueModel>>
+    fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): LiveData<MutableList<VenueModel>>
 }

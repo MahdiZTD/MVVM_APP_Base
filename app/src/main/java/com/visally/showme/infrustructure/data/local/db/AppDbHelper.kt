@@ -15,7 +15,7 @@ class AppDbHelper @Inject constructor(val appDatabase: AppDatabase) : DbHelper {
         appDatabase.venueDao().insertVenue(venueModels)
     }
 
-    override fun getAllVenueByLocationFromDb(lat: Float, lng: Float): LiveData<List<VenueModel>> {
-        return appDatabase.venueDao().queryByLocation(lat, lng)
+    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): LiveData<MutableList<VenueModel>> {
+        return appDatabase.venueDao().queryByLocation(lat1, lng1,lat2,lng2)
     }
 }

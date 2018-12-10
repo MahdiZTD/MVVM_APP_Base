@@ -2,7 +2,7 @@ package com.visally.showme.infrustructure.utils
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-
+import timber.log.Timber
 
 
 /**
@@ -27,6 +27,7 @@ abstract class EndlessRecyclerOnScrollListener : RecyclerView.OnScrollListener()
         val visibleItemCount = recyclerView.childCount
         val totalItemCount = recyclerView.layoutManager!!.itemCount
         val firstVisibleItem = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+//        Timber.d(visibleItemCount.toString() + "\n"+totalItemCount.toString() + "\n" + firstVisibleItem.toString() )
 
         if (mLoading) {
             if (totalItemCount > mPreviousTotal) {
@@ -37,7 +38,7 @@ abstract class EndlessRecyclerOnScrollListener : RecyclerView.OnScrollListener()
         val visibleThreshold = 5
         if (!mLoading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
             // End has been reached
-
+//            Timber.d("LOAD_MORE")
             onLoadMore()
 
             mLoading = true

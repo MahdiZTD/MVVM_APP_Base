@@ -66,15 +66,16 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
         mBinding.rvVenue.adapter = mVenueAdapter
         mBinding.rvVenue.addOnScrollListener(object : EndlessRecyclerOnScrollListener() {
             override fun onLoadMore() {
+                Timber.d("LOAD_MORE")
                 if (mAddress != null) {
-                    mViewModel.getNearVenue(mAddress!!.latitude.toFloat(), mAddress!!.longitude.toFloat(), page++)
+                    mViewModel.getNearVenue(mAddress!!.latitude.toFloat(), mAddress!!.longitude.toFloat(),++page)
                 }
             }
         })
     }
 
     private fun setVenue() {
-        mViewModel.venueModels.observe(this, Observer<List<VenueModel>> {
+        mViewModel.venueModels.observe(this, Observer<MutableList<VenueModel>> {
             if (it != null) {
                 Timber.d(it.size.toString())
                 mViewModel.venueObservableArrayList.addAll(it)
@@ -104,11 +105,18 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
                 == PackageManager.PERMISSION_GRANTED) {
             disposable.add(rxLocation.location().updates(locationRequest)
                     .flatMap<Address> { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
-                    .subscribe { address ->
+                    .subscribe ({ address ->
                         mAddress = address
                         mViewModel.getNearVenue(address.latitude.toFloat(), address.longitude.toFloat(), page)
-                    }
+                    },{
+                        throwable: Throwable? -> throwable?.printStackTrace()
+                    })
             )
+            disposable.add(rxLocation.location().lastLocation().subscribe({
+                mViewModel.retrieveData(it.latitude.toFloat(),it.longitude.toFloat())
+            },{
+                throwable: Throwable? -> throwable?.printStackTrace()
+            }))
         } else {
             ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),

@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-class AppDataManger @Inject constructor(val context: Context, val dbHelper: DbHelper, val preferencesHelper: PreferencesHelper, val apiHelper: ApiHelper): DataManager {
+class AppDataManger @Inject constructor(val context: Context, val dbHelper: DbHelper, val preferencesHelper: PreferencesHelper, val apiHelper: ApiHelper) : DataManager {
     override fun getAllVenueFromDb(): LiveData<List<VenueModel>> {
         return dbHelper.getAllVenueFromDb()
     }
@@ -25,12 +25,12 @@ class AppDataManger @Inject constructor(val context: Context, val dbHelper: DbHe
         dbHelper.insertVenueModel(venueModels)
     }
 
-    override fun getAllVenueByLocationFromDb(lat: Float, lng: Float): LiveData<List<VenueModel>> {
-        return dbHelper.getAllVenueByLocationFromDb(lat,lng)
+    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): LiveData<MutableList<VenueModel>> {
+        return dbHelper.getAllVenueByLocationFromDb(lat1, lng1, lat2, lng2)
     }
 
-    override fun getNearVenueByLocationFromApi(location: String, clientId: String, clientSecret: String, date: String, limit: Int, offset:Int): Single<SearchVenueResponse> {
-        return apiHelper.getNearVenueByLocationFromApi(location, clientId, clientSecret, date,limit,offset)
+    override fun getNearVenueByLocationFromApi(location: String, clientId: String, clientSecret: String, date: String, limit: Int, offset: Int): Single<SearchVenueResponse> {
+        return apiHelper.getNearVenueByLocationFromApi(location, clientId, clientSecret, date, limit, offset)
 
     }
 

@@ -10,7 +10,7 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
-import com.visally.infrustructure.utils.NetworkUtils
+import com.visally.showme.infrustructure.utils.NetworkUtils
 import dagger.android.AndroidInjection
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -68,9 +68,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
         }
     }
 
-    fun hideLoading() {
-    }
-
 
     private fun performDependencyInjection() {
         AndroidInjection.inject(this)
@@ -83,10 +80,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
         }
     }
 
-    fun showLoading() {
-        hideLoading()
-//        mProgressDialog = CommonUtils.(this)
-    }
+
 
     private fun performDataBinding() {
         viewDataBinding = DataBindingUtil.setContentView(this, layoutId)

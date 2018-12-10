@@ -1,24 +1,28 @@
 package com.visally.showme.ui.venuelist
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.databinding.Observable
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import com.visally.showme.infrustructure.data.DataManager
 import com.visally.showme.infrustructure.data.model.api.searchvenue.SearchVenueResponse
+import com.visally.showme.infrustructure.data.model.api.searchvenue.Venue
 import com.visally.showme.infrustructure.data.model.db.VenueModel
 import com.visally.showme.infrustructure.utils.AppConstants
 import com.visally.showme.infrustructure.utils.rx.SchedulersProvider
 import com.visally.showme.ui.base.BaseViewModel
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Action
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class VenueListViewModel constructor(val dataManager: DataManager, val schedulersProvider: SchedulersProvider) : BaseViewModel<VenueListNavigator>(schedulersProvider, dataManager) {
     val disposable = CompositeDisposable()
-    var venueModels: LiveData<List<VenueModel>> = dataManager.getAllVenueByLocationFromDb(76.75672f,72.45479f)
+    val venueModels = MutableLiveData<MutableList<VenueModel>>()
     var venueObservableArrayList: ObservableList<VenueModel> = ObservableArrayList()
 
     fun getNearVenue(lat: Float, lng: Float, page: Int) {
@@ -30,7 +34,7 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
                 page * AppConstants.PAGE_LIMIT)
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
-                .subscribe { searchVenueModel: SearchVenueResponse? ->
+                .subscribe ({ searchVenueModel: SearchVenueResponse?->
                     val venueModel: MutableList<VenueModel> = mutableListOf()
                     searchVenueModel?.response?.groups?.forEach {
                         it?.items?.forEach { group ->
@@ -49,9 +53,26 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
                         it.onComplete()
                     }.subscribeOn(schedulersProvider.io())
                             .observeOn(schedulersProvider.ui())
-                            .subscribe()
-                }
+                            .subscribe{
+//                                venueModels.value?.addAll(venueModel)
+                                venueModels.value = venueModel
+                            }
+
+                },{
+                    throwable: Throwable? -> throwable?.printStackTrace()
+                })
         )
+    }
+
+    fun retrieveData(lat:Float , lng:Float){
+
+        Timber.d("retrieveData "+lat.toString()+" "+lng.toString())
+
+//        venueModels.value?.addAll(dataManager.getAllVenueByLocationFromDb(
+//                lat - AppConstants.METER_DISTANCE
+//                , lng - AppConstants.METER_DISTANCE
+//                , lat + AppConstants.METER_DISTANCE
+//                , lng + AppConstants.METER_DISTANCE).value)
     }
 
     fun getDate(): String {

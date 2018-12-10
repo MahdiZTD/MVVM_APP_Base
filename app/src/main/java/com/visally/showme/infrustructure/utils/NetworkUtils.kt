@@ -3,12 +3,10 @@ package com.visally.showme.infrustructure.utils
 import android.content.Context
 import android.net.ConnectivityManager
 
-/*************************************
- *This File Is created By
- * mahdi_TD
- * on
- * 7/3/2018  10:14 AM.
- *************************************/
+/**
+ * Created by Mahdi_ZareTahghighDoost(ZTD)
+ *  on 12/9/2018.
+ */
 
 object NetworkUtils {
 
