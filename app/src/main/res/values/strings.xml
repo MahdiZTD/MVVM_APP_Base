@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ShowMe</string>
+    <string name="distance">distance</string>
+    <string name="category">category</string>
+    <string name="scan">scan</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
+</resources>
