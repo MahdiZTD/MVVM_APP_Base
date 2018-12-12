@@ -32,7 +32,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@DatabaseInfo dbName:String, context: Context): AppDatabase {
-        return Room.databaseBuilder(context,AppDatabase::class.java,dbName).allowMainThreadQueries().build()
+        return Room.databaseBuilder(context,AppDatabase::class.java,dbName).fallbackToDestructiveMigration().build()
     }
 
     @Provides

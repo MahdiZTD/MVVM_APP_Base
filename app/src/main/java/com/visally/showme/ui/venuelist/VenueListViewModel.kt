@@ -2,7 +2,6 @@ package com.visally.showme.ui.venuelist
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.databinding.Observable
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import com.visally.showme.infrustructure.data.DataManager
@@ -13,6 +12,9 @@ import com.visally.showme.infrustructure.utils.AppConstants
 import com.visally.showme.infrustructure.utils.rx.SchedulersProvider
 import com.visally.showme.ui.base.BaseViewModel
 import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.SingleObserver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import timber.log.Timber
@@ -21,20 +23,19 @@ import java.util.*
 
 
 class VenueListViewModel constructor(val dataManager: DataManager, val schedulersProvider: SchedulersProvider) : BaseViewModel<VenueListNavigator>(schedulersProvider, dataManager) {
-    val disposable = CompositeDisposable()
     val venueModels = MutableLiveData<MutableList<VenueModel>>()
     var venueObservableArrayList: ObservableList<VenueModel> = ObservableArrayList()
 
     fun getNearVenue(lat: Float, lng: Float, page: Int) {
         val location = lat.toString() + "," + lng.toString()
-        disposable.add(dataManager.getNearVenueByLocationFromApi(location,
+        compositeDisposable.add(dataManager.getNearVenueByLocationFromApi(location,
                 AppConstants.CLIET_ID,
                 AppConstants.CLIET_SECRET, getDate(),
                 AppConstants.PAGE_LIMIT,
                 page * AppConstants.PAGE_LIMIT)
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
-                .subscribe ({ searchVenueModel: SearchVenueResponse?->
+                .subscribe({ searchVenueModel: SearchVenueResponse? ->
                     val venueModel: MutableList<VenueModel> = mutableListOf()
                     searchVenueModel?.response?.groups?.forEach {
                         it?.items?.forEach { group ->
@@ -53,26 +54,33 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
                         it.onComplete()
                     }.subscribeOn(schedulersProvider.io())
                             .observeOn(schedulersProvider.ui())
-                            .subscribe{
+                            .subscribe {
 //                                venueModels.value?.addAll(venueModel)
                                 venueModels.value = venueModel
                             }
 
-                },{
-                    throwable: Throwable? -> throwable?.printStackTrace()
+                }, { throwable: Throwable? ->
+                    throwable?.printStackTrace()
                 })
         )
     }
 
-    fun retrieveData(lat:Float , lng:Float){
+    fun retrieveData(lat: Float, lng: Float) {
 
-        Timber.d("retrieveData "+lat.toString()+" "+lng.toString())
-
-//        venueModels.value?.addAll(dataManager.getAllVenueByLocationFromDb(
-//                lat - AppConstants.METER_DISTANCE
-//                , lng - AppConstants.METER_DISTANCE
-//                , lat + AppConstants.METER_DISTANCE
-//                , lng + AppConstants.METER_DISTANCE).value)
+        Timber.d("retrieveData " + lat.toString() + " " + lng.toString())
+        compositeDisposable.add(dataManager.getAllVenueByLocationFromDb(
+                lat - AppConstants.METER_DISTANCE
+                , lng - AppConstants.METER_DISTANCE
+                , lat + AppConstants.METER_DISTANCE
+                , lng + AppConstants.METER_DISTANCE)
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
+                .subscribe({
+                    venueModels.value = it
+                }, {
+                    it.printStackTrace()
+                })
+        )
     }
 
     fun getDate(): String {

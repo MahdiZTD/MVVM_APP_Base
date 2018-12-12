@@ -59,6 +59,9 @@ dependencies {
      */
     implementation "android.arch.persistence.room:runtime:$room_database"
     kapt "android.arch.persistence.room:compiler:$room_database"
+    implementation "android.arch.persistence.room:rxjava2:$room_database"
+    androidTestImplementation "android.arch.core:core-testing:$room_database"
+
 
     /**
      * LiveData

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.visally.showme.databinding.ItemVenueListBinding
 import com.visally.showme.infrustructure.data.model.db.VenueModel
 import com.visally.showme.ui.base.BaseViewHolder
+import timber.log.Timber
 
 /**
  * Created by Mahdi_ZareTahghighDoost(ZTD)
@@ -29,7 +30,8 @@ class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : Recycl
 
 
     fun addItems(venueList: List<VenueModel>) {
-        mVenueList.addAll(venueList.distinct())
+        mVenueList.addAll(venueList.distinctBy { it -> it.placeId })
+        Timber.d(mVenueList.size.toString())
         notifyDataSetChanged()
     }
 

@@ -25,7 +25,7 @@ class AppDataManger @Inject constructor(val context: Context, val dbHelper: DbHe
         dbHelper.insertVenueModel(venueModels)
     }
 
-    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): LiveData<MutableList<VenueModel>> {
+    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): Single<MutableList<VenueModel>> {
         return dbHelper.getAllVenueByLocationFromDb(lat1, lng1, lat2, lng2)
     }
 
