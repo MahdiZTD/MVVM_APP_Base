@@ -9,6 +9,7 @@ import com.visally.showme.infrustructure.data.model.api.searchvenue.SearchVenueR
 import com.visally.showme.infrustructure.data.model.api.searchvenue.Venue
 import com.visally.showme.infrustructure.data.model.db.VenueModel
 import com.visally.showme.infrustructure.utils.AppConstants
+import com.visally.showme.infrustructure.utils.getDate
 import com.visally.showme.infrustructure.utils.rx.SchedulersProvider
 import com.visally.showme.ui.base.BaseViewModel
 import io.reactivex.Completable
@@ -83,9 +84,4 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
         )
     }
 
-    fun getDate(): String {
-        val calendar = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-        return dateFormat.format(calendar)
-    }
 }
