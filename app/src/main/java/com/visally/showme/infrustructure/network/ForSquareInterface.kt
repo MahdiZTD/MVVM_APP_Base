@@ -18,4 +18,8 @@ interface ForSquareInterface {
                                @Query("limit") limit:Int,
                                @Query("offset") offset:Int):Single<SearchVenueResponse>
 
+// @GET("/v2/venues/?")
+//    fun getVenueByDetail(@Query("VENUE_ID") VENUE_ID:String):Single<VenueDetailResponse>
+
+
 }
