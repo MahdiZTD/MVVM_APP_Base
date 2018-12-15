@@ -4,6 +4,7 @@ import android.Manifest
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.visally.showme.databinding.ActivityVenueListBinding
 import com.visally.showme.infrustructure.data.model.db.VenueModel
 import com.visally.showme.infrustructure.utils.EndlessRecyclerOnScrollListener
 import com.visally.showme.ui.base.BaseActivity
+import com.visally.showme.ui.venuedetail.VenueDetailActivity
 import com.visally.showme.ui.venuelist.adapter.VenueRecyclerViewAdapter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.item_venue_list.*
@@ -63,6 +65,7 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
         mLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mBinding.rvVenue.layoutManager = mLayoutManager
         mBinding.rvVenue.itemAnimator = DefaultItemAnimator()
+        mVenueAdapter.mClickListener =this 
         mBinding.rvVenue.adapter = mVenueAdapter
         mBinding.rvVenue.addOnScrollListener(object : EndlessRecyclerOnScrollListener() {
             override fun onLoadMore() {
@@ -125,6 +128,10 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
     }
 
     override fun onItemClick(id: String) {
+        val  intent = Intent(this , VenueDetailActivity::class.java).apply {
+            putExtra("venueId" , id)
+        }
+        startActivity(intent)
     }
 
 }

@@ -2,6 +2,7 @@ package com.visally.showme.ui.venuelist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.visally.showme.databinding.ItemVenueListBinding
 import com.visally.showme.infrustructure.data.model.db.VenueModel
@@ -13,7 +14,8 @@ import timber.log.Timber
  *  on 12/8/2018.
  */
 class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : RecyclerView.Adapter<BaseViewHolder>() {
-    val mClickListener: VenueRecyclerListener? = null
+    var mClickListener: VenueRecyclerListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): BaseViewHolder {
         val blogViewBinding = ItemVenueListBinding.inflate(LayoutInflater.from(parent.context),
                 parent, false)
@@ -28,7 +30,6 @@ class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : Recycl
         holder.onBind(position)
     }
 
-
     fun addItems(venueList: List<VenueModel>) {
         mVenueList.addAll(venueList.distinctBy { it -> it.placeId })
         Timber.d(mVenueList.size.toString())
@@ -37,10 +38,10 @@ class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : Recycl
 
     fun clearItems() {
         mVenueList.clear()
-//        notifyDataSetChanged()
     }
 
-    inner class VenueViewHolder(private val mBinding: ItemVenueListBinding) : BaseViewHolder(mBinding.root), VenueItemViewModel.VenueItemClickListener {
+    inner class VenueViewHolder(private val mBinding: ItemVenueListBinding) : BaseViewHolder(mBinding.root), VenueItemViewModel.VenueItemClickListener{
+
 
         private var mVenueItemViewModel: VenueItemViewModel? = null
 
@@ -56,6 +57,7 @@ class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : Recycl
         }
 
         override fun onItemClick(id: String) {
+            Timber.d("clicked in adapter")
             mClickListener?.onItemClick(id)
         }
     }

@@ -2,6 +2,7 @@ package com.visally.showme.ui.venuelist.adapter
 
 import android.databinding.ObservableField
 import com.visally.showme.infrustructure.data.model.db.VenueModel
+import timber.log.Timber
 
 /**
  * Created by Mahdi_ZareTahghighDoost(ZTD)
@@ -18,6 +19,7 @@ class VenueItemViewModel(private val mVenue: VenueModel, val mListener: VenueIte
     private val distance: ObservableField<String> = ObservableField(mVenue.distance!!)
 
     fun onItemClick() {
+        Timber.d("clicked in view model")
         mListener.onItemClick(mVenue.placeId)
     }
 
