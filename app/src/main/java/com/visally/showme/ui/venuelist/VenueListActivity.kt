@@ -23,7 +23,6 @@ import com.visally.showme.ui.base.BaseActivity
 import com.visally.showme.ui.venuedetail.VenueDetailActivity
 import com.visally.showme.ui.venuelist.adapter.VenueRecyclerViewAdapter
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.item_venue_list.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -58,7 +57,7 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
         mViewModel.setNavigator(this)
         listenForLocationChanged()
         setUpVenueRecyclerView()
-        setVenue()
+        setVenueList()
     }
 
     private fun setUpVenueRecyclerView() {
@@ -77,7 +76,7 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
         })
     }
 
-    private fun setVenue() {
+    private fun setVenueList() {
         mViewModel.venueModels.observe(this, Observer<MutableList<VenueModel>> {
             if (it != null) {
                 Timber.d(it.size.toString())

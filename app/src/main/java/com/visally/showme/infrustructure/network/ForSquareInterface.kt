@@ -22,9 +22,9 @@ interface ForSquareInterface {
                                @Query("offset") offset:Int):Single<SearchVenueResponse>
 
     @GET("/v2/venues/{id}")
-    fun getVenueDetailById(@Query("client_id") clientId: String,
+    fun getVenueDetailById(@Path("id") venueId: String,
+                           @Query("client_id") clientId: String,
                            @Query("client_secret") clientSecret: String,
-                           @Query("v") date: String,
-                           @Path("id") venueId: String): Single<VenueDetailResponse>
+                           @Query("v") date: String): Single<VenueDetailResponse>
 
 }

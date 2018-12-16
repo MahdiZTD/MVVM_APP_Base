@@ -16,9 +16,9 @@ class VenueDetailViewModel constructor(val dataManager: DataManager, val schedul
                         .subscribeOn(schedulersProvider.io())
                         .observeOn(schedulersProvider.ui())
                         .subscribe({
-
+                            mNavigator.get()?.loadVenueDetailData(it)
                         }, {
-
+                            it.printStackTrace()
                         })
         )
     }

@@ -6,4 +6,7 @@
     <string name="textview">TextView</string>
     <string name="button">Button</string>
     <string name="venue_photo">venue photo</string>
+    <string name="like_photo">like photo</string>
+    <string name="go_to_map">go to map</string>
+    <string name="call">call</string>
 </resources>

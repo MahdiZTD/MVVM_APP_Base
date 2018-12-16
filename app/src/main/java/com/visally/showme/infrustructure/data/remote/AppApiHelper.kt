@@ -19,7 +19,7 @@ class AppApiHelper : ApiHelper {
         return RetrofitRepository()
                 .getForSquareRetrofit()
                 .create(ForSquareInterface::class.java)
-                .getVenueDetailById(clientId, clientSecret, date,venueId)
+                .getVenueDetailById(venueId,clientId, clientSecret, date)
     }
 
 

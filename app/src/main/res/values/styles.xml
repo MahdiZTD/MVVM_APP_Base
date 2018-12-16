@@ -41,11 +41,31 @@
         <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
     </style>
 
+    <style name="TextStyle.Title.Light" parent="TextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_grey_200</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
+    </style>
+
+    <style name="TextStyle.Title.Sub.Light" parent="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/md_grey_200</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
     <style name="TextStyle.Content" parent="TextStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/md_grey_800</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textAppearance">@style/TextAppearance.Text.Italic</item>
+    </style>
+
+    <style name="TextStyle.Like" parent="TextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/md_pink_A200</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
     </style>
 
     <style name="TextStyle.Highlight" parent="TextStyle">
