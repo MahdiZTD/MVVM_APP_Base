@@ -1,8 +1,11 @@
 package com.visally.showme.infrustructure.network
 
 import com.visally.showme.infrustructure.data.model.api.searchvenue.SearchVenueResponse
+import com.visally.showme.infrustructure.data.model.api.venuedetail.VenueDetailResponse
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by Mahdi_ZareTahghighDoost(ZTD)
@@ -18,8 +21,10 @@ interface ForSquareInterface {
                                @Query("limit") limit:Int,
                                @Query("offset") offset:Int):Single<SearchVenueResponse>
 
-// @GET("/v2/venues/?")
-//    fun getVenueByDetail(@Query("VENUE_ID") VENUE_ID:String):Single<VenueDetailResponse>
-
+    @GET("/v2/venues/{id}")
+    fun getVenueDetailById(@Query("client_id") clientId: String,
+                           @Query("client_secret") clientSecret: String,
+                           @Query("v") date: String,
+                           @Path("id") venueId: String): Single<VenueDetailResponse>
 
 }

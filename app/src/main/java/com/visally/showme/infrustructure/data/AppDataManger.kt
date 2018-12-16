@@ -6,6 +6,7 @@ import android.content.Context
 import com.visally.showme.infrustructure.data.local.db.DbHelper
 import com.visally.showme.infrustructure.data.local.prefs.PreferencesHelper
 import com.visally.showme.infrustructure.data.model.api.searchvenue.SearchVenueResponse
+import com.visally.showme.infrustructure.data.model.api.venuedetail.VenueDetailResponse
 import com.visally.showme.infrustructure.data.model.db.VenueModel
 import com.visally.showme.infrustructure.data.remote.ApiHelper
 import io.reactivex.Observable
@@ -34,5 +35,8 @@ class AppDataManger @Inject constructor(val context: Context, val dbHelper: DbHe
 
     }
 
+    override fun getVenueById(clientId: String, clientSecret: String, date: String, venueId: String): Single<VenueDetailResponse> {
+        return apiHelper.getVenueById(clientId,clientSecret,date,venueId)
+    }
 
 }
