@@ -1,7 +1,15 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Popular(
-	val isOpen: Boolean? = null,
-	val timeframes: List<TimeframesItem?>? = null,
-	val isLocalHoliday: Boolean? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Popular {
+
+    @SerializedName("isOpen")
+    var isOpen: Boolean? = null
+    @SerializedName("isLocalHoliday")
+    var isLocalHoliday: Boolean? = null
+    @SerializedName("timeframes")
+    var timeframes: List<Timeframe>? = null
+
+}

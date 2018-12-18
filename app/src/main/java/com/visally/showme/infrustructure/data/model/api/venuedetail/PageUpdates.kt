@@ -1,6 +1,13 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class PageUpdates(
-	val count: Int? = null,
-	val items: List<Any?>? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class PageUpdates {
+
+    @SerializedName("count")
+    var count: Int? = null
+    @SerializedName("items")
+    var items: List<Any>? = null
+
+}

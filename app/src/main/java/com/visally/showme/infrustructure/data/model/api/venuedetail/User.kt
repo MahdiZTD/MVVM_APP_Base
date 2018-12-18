@@ -1,9 +1,17 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class User(
-	val firstName: String? = null,
-	val lastName: String? = null,
-	val gender: String? = null,
-	val photo: Photo? = null,
-	val id: String? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class User {
+
+    @SerializedName("id")
+    var id: String? = null
+    @SerializedName("firstName")
+    var firstName: String? = null
+    @SerializedName("gender")
+    var gender: String? = null
+    @SerializedName("photo")
+    var photo: PhotoUser? = null
+
+}

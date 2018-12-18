@@ -4,4 +4,5 @@ import com.visally.showme.infrustructure.data.model.api.venuedetail.VenueDetailR
 
 interface VenueDetailNavigator{
     fun loadVenueDetailData(venueDetailResponse: VenueDetailResponse)
+    fun openMap(latitude:String?,longitude:String?,placeName:String?)
 }

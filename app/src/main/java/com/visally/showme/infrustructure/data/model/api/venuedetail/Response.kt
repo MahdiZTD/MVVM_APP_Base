@@ -1,5 +1,11 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Response(
-	val venue: Venue? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Response {
+
+    @SerializedName("venue")
+    var venue: Venue? = null
+
+}

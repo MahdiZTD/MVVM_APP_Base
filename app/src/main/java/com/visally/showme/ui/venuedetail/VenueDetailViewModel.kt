@@ -6,7 +6,11 @@ import com.visally.showme.infrustructure.utils.getDate
 import com.visally.showme.infrustructure.utils.rx.SchedulersProvider
 import com.visally.showme.ui.base.BaseViewModel
 
+
 class VenueDetailViewModel constructor(val dataManager: DataManager, val schedulersProvider: SchedulersProvider) : BaseViewModel<VenueDetailNavigator>(schedulersProvider, dataManager) {
+    var latitude: String? = null
+    var longitude: String? = null
+    var placeName: String? = null
 
     fun getVenueDetail(id: String) {
         compositeDisposable.add(
@@ -17,9 +21,16 @@ class VenueDetailViewModel constructor(val dataManager: DataManager, val schedul
                         .observeOn(schedulersProvider.ui())
                         .subscribe({
                             mNavigator.get()?.loadVenueDetailData(it)
+                            latitude = it.response?.venue?.location?.lat?.toString()
+                            longitude = it.response?.venue?.location?.lng?.toString()
+                            placeName = it.response?.venue?.name
                         }, {
                             it.printStackTrace()
                         })
         )
+    }
+
+    fun onMapClick() {
+        mNavigator.get()?.openMap(latitude,longitude,placeName)
     }
 }

@@ -1,5 +1,11 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Stats(
-	val tipCount: Int? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Stats {
+
+    @SerializedName("tipCount")
+    var tipCount: Int? = null
+
+}

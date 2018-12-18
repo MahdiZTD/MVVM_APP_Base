@@ -1,7 +1,15 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class HereNow(
-	val summary: String? = null,
-	val count: Int? = null,
-	val groups: List<Any?>? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class HereNow {
+
+    @SerializedName("count")
+    var count: Int? = null
+    @SerializedName("summary")
+    var summary: String? = null
+    @SerializedName("groups")
+    var groups: List<Any>? = null
+
+}

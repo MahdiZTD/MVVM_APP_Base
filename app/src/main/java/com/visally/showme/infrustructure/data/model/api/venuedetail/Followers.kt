@@ -1,5 +1,11 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Followers(
-	val count: Int? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Followers {
+
+    @SerializedName("count")
+    var count: Int? = null
+
+}

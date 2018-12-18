@@ -1,6 +1,13 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class VenueDetailResponse(
-	val meta: Meta? = null,
-	val response: Response? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class VenueDetailResponse {
+
+    @SerializedName("meta")
+    var meta: Meta? = null
+    @SerializedName("response")
+    var response: Response? = null
+
+}

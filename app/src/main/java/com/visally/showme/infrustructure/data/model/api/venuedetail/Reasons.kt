@@ -1,6 +1,13 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Reasons(
-	val count: Int? = null,
-	val items: List<ItemsItem?>? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Reasons {
+
+    @SerializedName("count")
+    var count: Int? = null
+    @SerializedName("items")
+    var items: List<ItemReasons>? = null
+
+}

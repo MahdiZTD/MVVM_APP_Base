@@ -1,9 +1,13 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Contact(
-	val twitter: String? = null,
-	val facebookUsername: String? = null,
-	val facebook: String? = null,
-	val instagram: String? = null,
-	val facebookName: String? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Contact {
+
+    @SerializedName("phone")
+    var phone: String? = null
+    @SerializedName("formattedPhone")
+    var formattedPhone: String? = null
+
+}

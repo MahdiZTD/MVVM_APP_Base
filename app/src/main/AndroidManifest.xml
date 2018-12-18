@@ -17,12 +17,13 @@
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.venuelist.VenueListActivity" />
-        <activity android:name=".ui.venuedetail.VenueDetailActivity"></activity>
+        <activity android:name=".ui.venuedetail.VenueDetailActivity"/>
     </application>
 
 </manifest>

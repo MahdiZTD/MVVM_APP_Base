@@ -1,6 +1,13 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Icon(
-	val prefix: String? = null,
-	val suffix: String? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Icon {
+
+    @SerializedName("prefix")
+    var prefix: String? = null
+    @SerializedName("suffix")
+    var suffix: String? = null
+
+}

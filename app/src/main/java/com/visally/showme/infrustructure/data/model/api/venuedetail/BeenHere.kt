@@ -1,8 +1,17 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class BeenHere(
-	val marked: Boolean? = null,
-	val count: Int? = null,
-	val unconfirmedCount: Int? = null,
-	val lastCheckinExpiredAt: Int? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class BeenHere {
+
+    @SerializedName("count")
+    var count: Int? = null
+    @SerializedName("unconfirmedCount")
+    var unconfirmedCount: Int? = null
+    @SerializedName("marked")
+    var marked: Boolean? = null
+    @SerializedName("lastCheckinExpiredAt")
+    var lastCheckinExpiredAt: Int? = null
+
+}

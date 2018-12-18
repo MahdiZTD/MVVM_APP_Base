@@ -1,5 +1,11 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Attributes(
-	val groups: List<GroupsItem?>? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Attributes {
+
+    @SerializedName("groups")
+    var groups: List<GroupAttributes>? = null
+
+}

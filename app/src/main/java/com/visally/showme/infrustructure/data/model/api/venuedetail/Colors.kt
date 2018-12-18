@@ -1,7 +1,15 @@
 package com.visally.showme.infrustructure.data.model.api.venuedetail
 
-data class Colors(
-	val highlightColor: HighlightColor? = null,
-	val algoVersion: Int? = null,
-	val highlightTextColor: HighlightTextColor? = null
-)
+
+import com.google.gson.annotations.SerializedName
+
+class Colors {
+
+    @SerializedName("highlightColor")
+    var highlightColor: HighlightColor? = null
+    @SerializedName("highlightTextColor")
+    var highlightTextColor: HighlightTextColor? = null
+    @SerializedName("algoVersion")
+    var algoVersion: Int? = null
+
+}
