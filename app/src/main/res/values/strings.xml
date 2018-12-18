@@ -9,4 +9,5 @@
     <string name="like_photo">like photo</string>
     <string name="go_to_map">go to map</string>
     <string name="call">call</string>
+    <string name="user_avatar">user avatar</string>
 </resources>

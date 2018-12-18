@@ -22,6 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/scan"
@@ -36,20 +37,22 @@
             <TextView
                 android:id="@+id/txt_venue_item_name"
                 style="@style/TextStyle.Title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintLeft_toRightOf="@id/vertical_guideline"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/vertical_guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="hhhhhhhujghjghjhfhfhfghfghfgfghfghfghfghfghfghfghfghh" />
+                tools:text="hhhhfghfghfghfghfghh" />
 
             <TextView
                 android:id="@+id/txt_venue_item_address"
                 style="@style/TextStyle.Title.Sub"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@id/vertical_guideline"
+                app:layout_constraintEnd_toEndOf="@id/vertical_guideline_end"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/txt_venue_item_name"
                 tools:text="sub" />
 
@@ -58,6 +61,7 @@
                 android:layout_width="34dp"
                 android:layout_height="28dp"
                 android:layout_margin="2dp"
+                android:layout_marginBottom="8dp"
                 android:contentDescription="@string/distance"
                 android:src="@drawable/ic_distance"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -105,6 +109,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="70dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/vertical_guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="10dp" />
 
         </android.support.constraint.ConstraintLayout>
 

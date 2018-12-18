@@ -2,7 +2,6 @@ package com.visally.showme.ui.venuelist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.visally.showme.databinding.ItemVenueListBinding
 import com.visally.showme.infrustructure.data.model.db.VenueModel
@@ -17,9 +16,9 @@ class VenueRecyclerViewAdapter(val mVenueList: MutableList<VenueModel>) : Recycl
     var mClickListener: VenueRecyclerListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): BaseViewHolder {
-        val blogViewBinding = ItemVenueListBinding.inflate(LayoutInflater.from(parent.context),
+        val venueViewBinding = ItemVenueListBinding.inflate(LayoutInflater.from(parent.context),
                 parent, false)
-        return VenueViewHolder(blogViewBinding)
+        return VenueViewHolder(venueViewBinding)
     }
 
     override fun getItemCount(): Int {

@@ -53,5 +53,6 @@ class VenueDetailActivity : BaseActivity<ActivityVenueDetailBinding, VenueDetail
                         venueDetailResponse.response?.venue?.categories?.get(0)?.icon?.suffix)
                 .into(mBinding.imgCategory)
 
+
     }
 }
