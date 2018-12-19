@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data/>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.splashactivity.SplashActivity">
+        android:layout_width="match_parent"
+        tools:context=".ui.splash.SplashActivity"
+        android:background="@color/md_white_1000">
 
 
+        <ImageView
+            android:contentDescription="@string/splash_animation"
+            android:id="@+id/img_animation"
+            android:layout_height="0dp"
+            android:layout_margin="40dp"
+            android:layout_width="0dp"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            tools:srcCompat="@drawable/ic_favorite_red" />
     </android.support.constraint.ConstraintLayout>
 </layout>

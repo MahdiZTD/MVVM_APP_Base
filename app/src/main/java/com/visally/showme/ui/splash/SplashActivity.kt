@@ -10,15 +10,41 @@ import com.visally.showme.ui.venuelist.VenueListActivity
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
+import android.R.raw
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import io.reactivex.disposables.CompositeDisposable
+import com.visally.showme.R.id.imageView
+
+
+
 
 class SplashActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySplashBinding
+    private val compositeDisposable = CompositeDisposable()
+    lateinit var binding : ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        var s = Observable.timer(3,TimeUnit.SECONDS,Schedulers.io())
+
+        Glide.with(this)
+                .load(R.raw.animation)
+                .asGif()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(binding.imgAnimation)
+
+        compositeDisposable.add(Observable.timer(3,TimeUnit.SECONDS,Schedulers.io())
                 .subscribe {
-                    startActivity(Intent(applicationContext,VenueListActivity::class.java))
+                    startActivity(Intent(this,VenueListActivity::class.java))
+                    this.finish()
                 }
+        )
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
+    }
+
 }

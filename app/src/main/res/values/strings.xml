@@ -10,4 +10,5 @@
     <string name="go_to_map">go to map</string>
     <string name="call">call</string>
     <string name="user_avatar">user avatar</string>
+    <string name="splash_animation">splash animation</string>
 </resources>
