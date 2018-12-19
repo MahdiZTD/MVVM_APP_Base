@@ -47,15 +47,7 @@ class VenueDetailActivity : BaseActivity<ActivityVenueDetailPreLoadBinding, Venu
     }
 
     override fun loadVenueDetailData(venueDetailResponse: VenueDetailResponse) {
-        pageLoaded.clone(this, R.layout.activity_venue_detail)
-
-        val transition = ChangeBounds()
-        transition.interpolator = DecelerateInterpolator()
-        transition.duration = 1000
-        TransitionManager.beginDelayedTransition(rootView,transition)
-        val constraint = pageLoaded
-        constraint.applyTo(rootView)
-
+        showResources()
         mBinding.txtAddress.text = venueDetailResponse.response?.venue?.location?.address
         mBinding.txtTitle.text = venueDetailResponse.response?.venue?.name
         mBinding.txtLikeCount.text = venueDetailResponse.response?.venue?.likes?.count.toString()
@@ -82,9 +74,24 @@ class VenueDetailActivity : BaseActivity<ActivityVenueDetailPreLoadBinding, Venu
                 .into(mBinding.imgHeader)
     }
 
+    fun showResources(){
+        pageLoaded.clone(this, R.layout.activity_venue_detail)
+        val transition = ChangeBounds()
+        transition.interpolator = DecelerateInterpolator()
+        transition.duration = 1000
+        TransitionManager.beginDelayedTransition(rootView,transition)
+        val constraint = pageLoaded
+        constraint.applyTo(rootView)
+    }
     override fun openMap(latitude:String?,longitude:String?,placeName:String?) {
         val intent = Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("geo:0,0?q=$latitude,$longitude ($placeName)"))
+        startActivity(intent)
+    }
+
+    override fun callPlace(tel: String?) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$tel")
         startActivity(intent)
     }
 }

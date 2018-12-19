@@ -5,12 +5,14 @@ import com.visally.showme.infrustructure.utils.AppConstants
 import com.visally.showme.infrustructure.utils.getDate
 import com.visally.showme.infrustructure.utils.rx.SchedulersProvider
 import com.visally.showme.ui.base.BaseViewModel
+import timber.log.Timber
 
 
 class VenueDetailViewModel constructor(val dataManager: DataManager, val schedulersProvider: SchedulersProvider) : BaseViewModel<VenueDetailNavigator>(schedulersProvider, dataManager) {
     var latitude: String? = null
     var longitude: String? = null
     var placeName: String? = null
+    var phoneNumber:String? = null
 
     fun getVenueDetail(id: String) {
         compositeDisposable.add(
@@ -24,6 +26,7 @@ class VenueDetailViewModel constructor(val dataManager: DataManager, val schedul
                             latitude = it.response?.venue?.location?.lat?.toString()
                             longitude = it.response?.venue?.location?.lng?.toString()
                             placeName = it.response?.venue?.name
+                            phoneNumber = it.response?.venue?.contact?.phone
                         }, {
                             it.printStackTrace()
                         })
@@ -32,5 +35,9 @@ class VenueDetailViewModel constructor(val dataManager: DataManager, val schedul
 
     fun onMapClick() {
         mNavigator.get()?.openMap(latitude,longitude,placeName)
+    }
+
+    fun onCallClicked(){
+        mNavigator.get()?.callPlace(phoneNumber)
     }
 }

@@ -50,6 +50,7 @@ buildscript {
         rx_location = '1.0.5'
         play_services = '16.0.0'
 
+        lottie_version = '2.8.0'
 
         mockito = '2.15.0'
     }
