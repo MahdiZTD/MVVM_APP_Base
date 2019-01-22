@@ -77,7 +77,7 @@ class VenueListActivity : BaseActivity<ActivityVenueListBinding, VenueListViewMo
     }
 
     private fun setVenueList() {
-        mViewModel.venueModels.observe(this, Observer<MutableList<VenueModel>> {
+        mViewModel.mVenueModels.observe(this, Observer<MutableList<VenueModel>> {
             if (it != null) {
                 Timber.d(it.size.toString())
                 mViewModel.venueObservableArrayList.addAll(it)

@@ -24,8 +24,8 @@ import java.util.*
 
 
 class VenueListViewModel constructor(val dataManager: DataManager, val schedulersProvider: SchedulersProvider) : BaseViewModel<VenueListNavigator>(schedulersProvider, dataManager) {
-    val venueModels = MutableLiveData<MutableList<VenueModel>>()
-    var venueObservableArrayList: ObservableList<VenueModel> = ObservableArrayList()
+    val mVenueModels = MutableLiveData<MutableList<VenueModel>>()
+    var venueObservableArrayList: ObservableList<VenueModel> = ObservableArrayList<VenueModel>()
 
     fun getNearVenue(lat: Float, lng: Float, page: Int) {
         val location = lat.toString() + "," + lng.toString()
@@ -50,15 +50,8 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
                                     , group?.venue?.categories?.get(0)?.name))
                         }
                     }
-                    Completable.create {
-                        dataManager.insertVenueModel(venueModel)
-                        it.onComplete()
-                    }.subscribeOn(schedulersProvider.io())
-                            .observeOn(schedulersProvider.ui())
-                            .subscribe {
-//                                venueModels.value?.addAll(venueModel)
-                                venueModels.value = venueModel
-                            }
+                    insertVenueList(venueModel)
+
 
                 }, { throwable: Throwable? ->
                     throwable?.printStackTrace()
@@ -66,18 +59,26 @@ class VenueListViewModel constructor(val dataManager: DataManager, val scheduler
         )
     }
 
+    private fun insertVenueList(venueModels: MutableList<VenueModel>) {
+        compositeDisposable.add(Completable.create {
+            dataManager.insertVenueModel(venueModels)
+            it.onComplete()
+        }.subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
+                .subscribe {
+                    mVenueModels.value = venueModels
+                }
+        )
+    }
+
     fun retrieveData(lat: Float, lng: Float) {
 
         Timber.d("retrieveData " + lat.toString() + " " + lng.toString())
-        compositeDisposable.add(dataManager.getAllVenueByLocationFromDb(
-                lat - AppConstants.METER_DISTANCE
-                , lng - AppConstants.METER_DISTANCE
-                , lat + AppConstants.METER_DISTANCE
-                , lng + AppConstants.METER_DISTANCE)
+        compositeDisposable.add(dataManager.getAllVenueByLocationFromDb(lat, lng)
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
                 .subscribe({
-                    venueModels.value = it
+                    mVenueModels.value = it
                 }, {
                     it.printStackTrace()
                 })

@@ -9,5 +9,5 @@ import io.reactivex.Single
 interface DbHelper {
     fun insertVenueModel(venueModels: MutableList<VenueModel>)
     fun getAllVenueFromDb(): LiveData<List<VenueModel>>
-    fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): Single<MutableList<VenueModel>>
+    fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float): Single<MutableList<VenueModel>>
 }

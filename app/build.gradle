@@ -30,11 +30,12 @@ android {
     dataBinding {
         enabled = true
     }
-    android {
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -63,6 +64,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_database"
     implementation "android.arch.persistence.room:rxjava2:$room_database"
     androidTestImplementation "android.arch.core:core-testing:$room_database"
+    testImplementation "android.arch.core:core-testing:$room_database"
 
     /**
      * LiveData
@@ -115,6 +117,15 @@ dependencies {
      */
     testImplementation "junit:junit:$junit"
     testImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
+
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
 }

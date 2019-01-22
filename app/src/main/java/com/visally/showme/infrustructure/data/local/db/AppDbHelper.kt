@@ -13,10 +13,10 @@ class AppDbHelper @Inject constructor(val appDatabase: AppDatabase) : DbHelper {
     }
 
     override fun insertVenueModel(venueModels: MutableList<VenueModel>) {
-        appDatabase.venueDao().insertVenue(venueModels)
+        appDatabase.venueDao().insertVenueList(venueModels)
     }
 
-    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float, lat2: Float, lng2: Float): Single<MutableList<VenueModel>>{
-        return appDatabase.venueDao().queryByLocation(lat1, lng1,lat2,lng2)
+    override fun getAllVenueByLocationFromDb(lat1: Float, lng1: Float): Single<MutableList<VenueModel>>{
+        return appDatabase.venueDao().queryByLocation(lat1, lng1)
     }
 }

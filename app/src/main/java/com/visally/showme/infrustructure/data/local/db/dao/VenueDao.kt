@@ -14,12 +14,18 @@ interface VenueDao {
     @Query("SELECT * FROM venue_item")
     fun loadAllVenues(): LiveData<List<VenueModel>>
 
-    @Query("SELECT * FROM venue_item WHERE (latitude > :lat1 AND latitude < :lat2 AND longitude > :lng1 AND longitude < :lng2)")
-    fun queryByLocation(lat1: Float, lng1: Float, lat2: Float, lng2: Float): Single<MutableList<VenueModel>>
+    @Query("SELECT * FROM venue_item WHERE (latitude > :lat1-0.0044915765 AND latitude < :lat1+0.0044915765 AND longitude > :lng1-0.0044915765 AND longitude < :lng1+0.0044915765)")
+    fun queryByLocation(lat1: Float, lng1: Float): Single<MutableList<VenueModel>>
+
+    @Query("SELECT * FROM venue_item WHERE :placeId == place_id")
+    fun getVenueById(placeId:String): LiveData<VenueModel>
 
     @Query("SELECT COUNT(*) FROM venue_item ")
     fun isEmpty(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertVenue(venueList: MutableList<VenueModel>)
+    fun insertVenueList(venueList: MutableList<VenueModel>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertVenue(venueList: VenueModel)
 }
