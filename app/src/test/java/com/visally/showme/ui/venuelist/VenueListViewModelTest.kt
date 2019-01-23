@@ -71,10 +71,6 @@ class VenueListViewModelTest {
 
         assertEquals(location, "35.797834,51.43404")
 
-//
-//        Mockito.`when`(this.userService.getRepositories(ArgumentMatchers.anyString())).thenAnswer {
-//            return@thenAnswer Maybe.just(ArgumentMatchers.anyList<Repository>())
-//        }
 
         Mockito.`when`(mMockDataManager
                 .getNearVenueByLocationFromApi(location, AppConstants.CLIET_ID,
