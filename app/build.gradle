@@ -120,12 +120,13 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$mockito"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
-
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
     testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
     // UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
 }

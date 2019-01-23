@@ -53,6 +53,9 @@ buildscript {
         lottie_version = '2.8.0'
 
         mockito = '2.15.0'
+        mockito_inline = '2.8.47'
+        mockito_kotlin  = '2.0.0-RC3'
+
     }
     repositories {
         google()

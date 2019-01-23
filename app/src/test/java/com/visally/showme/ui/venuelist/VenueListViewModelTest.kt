@@ -1,17 +1,22 @@
 package com.visally.showme.ui.venuelist
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.visally.showme.infrustructure.data.DataManager
 import com.visally.showme.infrustructure.data.model.api.searchvenue.SearchVenueResponse
+import com.visally.showme.infrustructure.data.model.api.venuedetail.VenueDetailResponse
 import com.visally.showme.infrustructure.utils.AppConstants
 import com.visally.showme.infrustructure.utils.getDate
 import com.visally.showme.infrustructure.utils.rx.TestSchedulerProvider
+import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import junit.framework.Assert.assertEquals
 import org.junit.*
 
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
@@ -19,6 +24,8 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class VenueListViewModelTest {
 
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
     var mVenueListNavigator: VenueListNavigator? = null
@@ -42,7 +49,7 @@ class VenueListViewModelTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         mTestScheduler = TestScheduler()
-        var testScheduler = TestSchedulerProvider(mTestScheduler)
+        val testScheduler = TestSchedulerProvider(mTestScheduler)
         mVenueListViewModel = VenueListViewModel(mMockDataManager, testScheduler)
         mVenueListViewModel.setNavigator(mVenueListNavigator!!)
 
@@ -54,26 +61,30 @@ class VenueListViewModelTest {
     }
 
     @Test
-    fun retrieveDataTest() {
-
-    }
-
-    @Test
-    fun getNearVenueTest() {
+    fun getNearVenueTest_positiveResponse() {
         val lat = "35.797834"
         val lng = "51.43404"
         val page = 1
         val date  = getDate()
 
-        val location: String = "$lat,$lng"
-        val searchVenueResponse = SearchVenueResponse()
+        val location = "$lat,$lng"
 
         assertEquals(location, "35.797834,51.43404")
 
-        `when`(mMockDataManager
+//
+//        Mockito.`when`(this.userService.getRepositories(ArgumentMatchers.anyString())).thenAnswer {
+//            return@thenAnswer Maybe.just(ArgumentMatchers.anyList<Repository>())
+//        }
+
+        Mockito.`when`(mMockDataManager
                 .getNearVenueByLocationFromApi(location, AppConstants.CLIET_ID,
                         AppConstants.CLIET_SECRET, date, AppConstants.PAGE_LIMIT, page * AppConstants.PAGE_LIMIT))
-                .thenReturn(Single.just(searchVenueResponse))
+                .thenReturn(Single.just(SearchVenueResponse()))
+
+        val spiedViewModel = com.nhaarman.mockitokotlin2.spy(mVenueListViewModel)
+        spiedViewModel.dataManager.getNearVenueByLocationFromApi(location, AppConstants.CLIET_ID,
+                AppConstants.CLIET_SECRET, date, AppConstants.PAGE_LIMIT, page * AppConstants.PAGE_LIMIT)
+
         mTestScheduler.triggerActions()
 
     }
