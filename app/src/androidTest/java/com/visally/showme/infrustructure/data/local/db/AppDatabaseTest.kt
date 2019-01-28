@@ -82,7 +82,7 @@ class AppDatabaseTest {
                             }
                         },
                         {
-                            it.printStackTrace();
+                            it.printStackTrace()
                         }
                 )
 
